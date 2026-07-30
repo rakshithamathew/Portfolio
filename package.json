@@ -11,11 +11,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
-    "format": "oxfmt",
-     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "format": "oxfmt"
   },
   "dependencies": {
     "react": "^19.0.0",
