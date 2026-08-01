@@ -1,11 +1,10 @@
 {
-  "title": "Rakshitha M — Portfolio",
-  "description": "Design and development portfolio of Rakshitha M.",
-  "language": "en",
+  "description": "Delivers a visually precise, animated web interface matching the original design to enhance user engagement and provide a seamless browsing experience.",
   "robots": {
-    "index": true
+    "index": false
   },
   "accessibility": {
-    "addBypassLinks": true
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
   }
 }
