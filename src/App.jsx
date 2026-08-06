@@ -20,6 +20,27 @@ function useReveal() {
   })
 }
 
+/* ─── Local time ─── */
+function useLocalTime() {
+  const [time, setTime] = useState('')
+  useEffect(() => {
+    const update = () => {
+      const t = new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      })
+      setTime(t)
+    }
+    update()
+    const id = setInterval(update, 1000)
+    return () => clearInterval(id)
+  }, [])
+  return time
+}
+
 /* ─── Dot circle ─── */
 const DotCircle = ({ onClick }) => (
   <span
@@ -38,6 +59,8 @@ const DotCircle = ({ onClick }) => (
    HERO
 ══════════════════════════════════════════ */
 function HeroSection({ onNext }) {
+  const localTime = useLocalTime()
+
   return (
     <section id="home" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
       {/* Ticker */}
@@ -92,7 +115,7 @@ function HeroSection({ onNext }) {
             </div>
 
             {/* Version / Local Time */}
-            {/* <div style={{ display: 'flex', gap: '3rem' }}>
+            <div style={{ display: 'flex', gap: '3rem' }}>
               <div>
                 <p style={{ fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.3rem' }}>Version</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--text)' }}>Portfolio-V1</p>
@@ -101,10 +124,10 @@ function HeroSection({ onNext }) {
                 <p style={{ fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.3rem' }}>Local Time</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--text)' }}>Bengaluru, IST {localTime}</p>
               </div>
-            </div> */}
+            </div>
 
             {/* Menu */}
-            {/* <div>
+            <div>
               <p style={{ fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>[Menu]</p>
               {[['01', 'About'], ['02', 'Skills'], ['03', 'Work'], ['04', 'Contact']].map(([num, label]) => (
                 <div key={num} style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.25rem' }}>
@@ -114,7 +137,7 @@ function HeroSection({ onNext }) {
                   </a>
                 </div>
               ))}
-            </div> */}
+            </div>
 
             {/* Next Page */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', alignSelf: 'flex-end' }}>
@@ -135,7 +158,8 @@ function HeroSection({ onNext }) {
 ══════════════════════════════════════════ */
 function AboutSection() {
   return (
-    <section id="about">
+    <section id="about" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+      {/* Nav */}
       <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem 2.5rem', borderBottom: '1px solid var(--border)' }}>
         <div>
           <p style={{ fontSize: '0.72rem', letterSpacing: '0.08em', fontWeight: 500, color: 'var(--text)', textTransform: 'uppercase' }}>RAKSHITHA M</p>
@@ -149,6 +173,36 @@ function AboutSection() {
           ))}
         </div>
       </nav>
+
+      {/* Watermark */}
+      <div style={{ position: 'absolute', right: '3rem', top: '50%', transform: 'translateY(-40%)', zIndex: 0, pointerEvents: 'none' }}>
+        <p className="font-display" style={{ fontSize: 'clamp(4rem, 12vw, 11rem)', color: 'rgba(26,20,16,0.05)', lineHeight: 1, letterSpacing: '0.05em' }}>
+          5+ YEARS
+        </p>
+      </div>
+
+      {/* Content */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '3rem 2.5rem', position: 'relative', zIndex: 1 }}>
+        <div className="reveal">
+          <h2 className="font-display fluid-text" style={{ color: 'var(--accent)', fontWeight: 600, lineHeight: 0.9 }}>
+            I'M A<br />
+            TECHNICAL<br />
+            LEAD &amp; BUILDER
+          </h2>
+        </div>
+
+        <div className="reveal" style={{ marginTop: '2.5rem', maxWidth: '520px' }}>
+          <p style={{ fontSize: '0.82rem', lineHeight: 1.85, color: 'var(--text-muted)' }}>
+            Product-focused engineer with 5+ years owning internal systems, leading development teams, and shipping complex products from zero to production. From healthcare OCR platforms to unified CRMs — I turn requirements into systems that scale.
+          </p>
+        </div>
+
+        <div className="reveal" style={{ marginTop: '2rem' }}>
+          <a href="#work" className="hover-line" style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textDecoration: 'none', letterSpacing: '0.06em' }}>
+            See my work
+          </a>
+        </div>
+      </div>
     </section>
   )
 }
