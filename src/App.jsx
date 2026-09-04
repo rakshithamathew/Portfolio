@@ -1,4 +1,10 @@
 import { useEffect, useState } from 'react'
+import resumePdf from './imports/Rakshitha_M.pdf'
+
+const profileLinks = {
+  linkedin: 'https://www.linkedin.com/in/rakshitha-m-b8a909190/',
+  github: 'https://github.com/rakshithamathew',
+}
 
 /* ─── Scroll reveal hook ─── */
 function useReveal() {
@@ -62,7 +68,7 @@ function HeroSection({ onNext }) {
   const localTime = useLocalTime()
 
   return (
-    <section id="home" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+    <section id="top" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
       {/* Ticker */}
       <div style={{ backgroundColor: 'var(--accent)', overflow: 'hidden', padding: '6px 0', flexShrink: 0 }}>
         <div className="marquee-track">
@@ -78,10 +84,10 @@ function HeroSection({ onNext }) {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '3rem 2.5rem 2.5rem', position: 'relative' }}>
         {/* Social — right */}
         <div style={{ position: 'absolute', right: '2rem', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center' }}>
-          {['LinkedIn', 'GitHub'].map((s) => (
-            <span key={s} className="hover-line" style={{ writingMode: 'vertical-rl', fontSize: '0.65rem', letterSpacing: '0.14em', color: 'var(--text-muted)', cursor: 'pointer', textTransform: 'uppercase', transform: 'rotate(180deg)' }}>
-              {s}
-            </span>
+          {[['LinkedIn', profileLinks.linkedin], ['GitHub', profileLinks.github]].map(([label, url]) => (
+            <a key={label} href={url} target="_blank" rel="noreferrer" className="hover-line" style={{ writingMode: 'vertical-rl', fontSize: '0.65rem', letterSpacing: '0.14em', color: 'var(--text-muted)', textDecoration: 'none', textTransform: 'uppercase', transform: 'rotate(180deg)' }}>
+              {label}
+            </a>
           ))}
         </div>
 
@@ -93,6 +99,7 @@ function HeroSection({ onNext }) {
           >
             RAKSHITHA M
           </h1>
+         
 
           <div className="h-line" style={{ margin: '1.5rem 0 1rem' }} />
 
@@ -100,36 +107,28 @@ function HeroSection({ onNext }) {
             {/* Subtitle */}
             <div>
               <p style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500, color: 'var(--text)' }}>
-                TECHNICAL LEAD &amp; FULL STACK DEVELOPER
+                Software Engineer / Technical Lead
               </p>
               <p style={{ fontSize: '0.72rem', letterSpacing: '0.06em', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                 Based in Bengaluru, India
               </p>
             </div>
-
+ <div style={{ position: 'absolute', right: '3rem', top: '50%', transform: 'translateY(-40%)', zIndex: 0, pointerEvents: 'none' }}>
+            <p className="font-display" style={{ fontSize: 'clamp(4rem, 12vw, 11rem)', color: 'rgba(26,20,16,0.05)', lineHeight: 1, letterSpacing: '0.05em' }}>
+              5+ YEARS
+            </p>
+          </div>
             {/* Bio */}
             <div style={{ maxWidth: '300px' }}>
               <p style={{ fontSize: '0.78rem', lineHeight: 1.7, color: 'var(--text-muted)' }}>
-                Product-focused Technical Lead with 5+ years of experience at the intersection of product development and technical delivery — building scalable, data-driven solutions that ship.
+                Product Engineer with building scalable web platforms and high-volume data applications across GenAI, growth, and product domains.
               </p>
-            </div>
-
-            {/* Version / Local Time */}
-            <div style={{ display: 'flex', gap: '3rem' }}>
-              <div>
-                <p style={{ fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.3rem' }}>Version</p>
-                <p style={{ fontSize: '0.72rem', color: 'var(--text)' }}>Portfolio-V1</p>
-              </div>
-              <div>
-                <p style={{ fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.3rem' }}>Local Time</p>
-                <p style={{ fontSize: '0.72rem', color: 'var(--text)' }}>Bengaluru, IST {localTime}</p>
-              </div>
             </div>
 
             {/* Menu */}
             <div>
               <p style={{ fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>[Menu]</p>
-              {[['01', 'About'], ['02', 'Skills'], ['03', 'Work'], ['04', 'Contact']].map(([num, label]) => (
+              {[['01', 'About'], ['02', 'Skills'], ['03', 'Work'], ['04', 'Experience'], ['05', 'Recognition'], ['06', 'Contact']].map(([num, label]) => (
                 <div key={num} style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.25rem' }}>
                   <span style={{ fontSize: '0.65rem', color: 'var(--accent)' }}>{num}</span>
                   <a href={`#${label.toLowerCase()}`} className="hover-line" style={{ fontSize: '0.72rem', color: 'var(--text)', textDecoration: 'none' }}>
@@ -160,13 +159,13 @@ function AboutSection() {
   return (
     <section id="about" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
       {/* Nav */}
-      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem 2.5rem', borderBottom: '1px solid var(--border)' }}>
+      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem 2.5rem', borderBottom: '1px solid var(--border)', position: 'sticky', top: 0, zIndex: 100, backgroundColor: 'var(--bg)' }}>
         <div>
           <p style={{ fontSize: '0.72rem', letterSpacing: '0.08em', fontWeight: 500, color: 'var(--text)', textTransform: 'uppercase' }}>RAKSHITHA M</p>
-          <p style={{ fontSize: '0.6rem', letterSpacing: '0.06em', color: 'var(--text-muted)', textTransform: 'uppercase' }}>TECHNICAL LEAD / FULL STACK DEVELOPER</p>
+          <p style={{ fontSize: '0.6rem', letterSpacing: '0.06em', color: 'var(--text-muted)', textTransform: 'uppercase' }}>SOFTWARE DEVELOPMENT TEAM LEAD / FULL-STACK ENGINEER</p>
         </div>
         <div style={{ display: 'flex', gap: '2rem' }}>
-          {['Top', 'About', 'Skills', 'Work', 'Contact'].map((item) => (
+          {['Top', 'About', 'Skills', 'Work', 'Experience', 'Contact'].map((item) => (
             <a key={item} href={`#${item.toLowerCase()}`} className="hover-line" style={{ fontSize: '0.72rem', color: 'var(--text)', textDecoration: 'none', letterSpacing: '0.04em' }}>
               {item}
             </a>
@@ -193,7 +192,7 @@ function AboutSection() {
 
         <div className="reveal" style={{ marginTop: '2.5rem', maxWidth: '520px' }}>
           <p style={{ fontSize: '0.82rem', lineHeight: 1.85, color: 'var(--text-muted)' }}>
-            Product-focused engineer with 5+ years owning internal systems, leading development teams, and shipping complex products from zero to production. From healthcare OCR platforms to unified CRMs — I turn requirements into systems that scale.
+            I lead architecture and delivery for customer-facing and internal products, with a focus on distributed systems, API design, performance, and reliable execution. My recent work spans AI-assisted healthcare records, growth platforms, enterprise workflows, and analytics products used at scale.
           </p>
         </div>
 
@@ -214,12 +213,12 @@ const skillGroups = [
   {
     num: '01',
     title: 'Front-End',
-    tags: ['React JS', 'Angular', 'Tailwind CSS', 'Redux', 'Material UI', 'GraphQL', 'JWT', 'OAuth'],
+    tags: ['React.js', 'TypeScript', 'Tailwind CSS', 'Material UI', 'Axios', 'Redux', 'Cypress', 'JWT', 'OAuth'],
   },
   {
     num: '02',
     title: 'Back-End & Infra',
-    tags: ['Node JS', 'Express JS', 'PostgreSQL', 'MySQL', 'Redis', 'WebSockets', 'Docker', 'Kubernetes', 'Azure', 'CI/CD', 'Microservices'],
+    tags: ['Node.js', 'Express.js', 'GraphQL', 'REST APIs', 'SQL', 'MySQL', 'WebSockets', 'Docker', 'Kubernetes', 'Azure', 'Nginx', 'CI/CD'],
   },
   {
     num: '03',
@@ -229,7 +228,7 @@ const skillGroups = [
   {
     num: '04',
     title: 'Product & Leadership',
-    tags: ['Product Strategy', 'Roadmap Planning', 'PRDs', 'Feature Prioritization', 'Stakeholder Management', 'User Research', 'System Design', 'SEO'],
+    tags: ['System Design', 'API Architecture', 'Micro-frontends', 'Responsive Design', 'Cross-functional Collaboration', 'Product Execution'],
   },
 ]
 
@@ -273,35 +272,39 @@ function SkillsSection() {
 ══════════════════════════════════════════ */
 const projects = [
   {
-    title: 'IEHP MEDICAL SYSTEM',
-    year: '2025',
-    stack: 'React · Node.js · Gemini Flash 3',
-    role: 'Technical Lead',
-    desc: 'Built an OCR platform that extracts handwritten medical notes and reports, digitalising them into a centralised dashboard for a US healthcare law firm.',
+    title: 'VIRTUAL CLOTHES TRY-ON AI',
+    year: 'Featured',
+    stack: 'React.js · Python · YouCam APIs · Gemini LLM',
+    role: 'Hackathon Project',
+    desc: 'An AI-driven virtual try-on experience that overlays garments onto user images for realistic outfit visualization.',
+    url: 'https://skin-you-cam-ai-frontend.vercel.app/',
     accent: '#5a6b4e',
   },
   {
-    title: 'PROCUREMENT DASHBOARD',
-    year: '2025',
-    stack: 'React · Chart.js',
-    role: 'Full Stack Developer',
-    desc: 'Designed an integrated analytics dashboard that processes uploaded data to calculate and visualise KPIs across quarterly, monthly, and yearly periods for strategic insights.',
+    title: 'AI JOB AUTOMATION',
+    year: 'Featured',
+    stack: 'React.js · Python · Apify · Perplexity · Playwright',
+    role: 'Full-Stack Developer',
+    desc: 'A centralized job tracker with multi-source aggregation, AI matching, cover-letter generation, and compatibility scoring.',
+    url: 'https://job-application-automation-kappa.vercel.app/',
     accent: '#4e5a6b',
   },
   {
-    title: 'UNIFIED CRM',
-    year: '2025',
-    stack: 'React · Redux · Python · PostgreSQL · Webhooks',
-    role: 'Full Stack Developer',
-    desc: 'Integrated Google Ads, Facebook, Dailics, Retell, and webhooks into a unified CRM enabling cost-per-channel analysis and targeted campaign optimisation — generating 200–300 organic leads monthly.',
+    title: 'MARKDOWN PRODUCTION APP',
+    year: 'Featured',
+    stack: 'Next.js · Tailwind CSS',
+    role: 'Full-Stack Developer',
+    desc: 'A privacy-focused browser-based Markdown viewer with GitHub Flavored Markdown rendering and no document uploads or exposure.',
+    url: 'https://markdown-application-hazel.vercel.app/',
     accent: '#6b4e5a',
   },
   {
-    title: 'ASSET MANAGEMENT DASHBOARD',
-    year: '2025',
-    stack: 'React · Node.js · PostgreSQL',
-    role: 'Software Development Team Lead',
-    desc: 'Architected and delivered a dashboard to track 200+ equipment assets and analyse costs, vendors, and employee data across the organisation.',
+    title: 'PROCUREMENT DASHBOARD',
+    year: 'Featured',
+    stack: 'Next.js · Chart.js',
+    role: 'Full-Stack Developer',
+    desc: 'An integrated analytics dashboard that processes uploaded data and visualizes quarterly, monthly, and yearly procurement KPIs.',
+    url: 'https://supply-chain-dashboard-ym3w.vercel.app/',
     accent: '#5a4e6b',
   },
 ]
@@ -325,13 +328,16 @@ function WorkCard({ project, index }) {
           </h3>
           <p style={{ fontSize: '0.78rem', lineHeight: 1.8, color: 'var(--text-muted)', maxWidth: '340px', marginBottom: '2rem' }}>{project.desc}</p>
           <div style={{ display: 'flex', gap: '2.5rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
-            {[['Year', project.year], ['Stack', project.stack], ['Role', project.role]].map(([k, v]) => (
+            {[['Status', project.year], ['Stack', project.stack], ['Role', project.role]].map(([k, v]) => (
               <div key={k}>
                 <p style={{ fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.3rem' }}>{k}</p>
                 <p style={{ fontSize: '0.7rem', color: 'var(--text)' }}>{v}</p>
               </div>
             ))}
           </div>
+          <a href={project.url} target="_blank" rel="noreferrer" className="hover-line" style={{ fontSize: '0.7rem', color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.06em' }}>
+            View live project ↗
+          </a>
         </div>
 
         {/* Mock screen */}
@@ -375,23 +381,23 @@ function WorkSection() {
    WORKS OS — project list + Gantt
 ══════════════════════════════════════════ */
 const projectList = [
-  { name: 'IEHP Medical System', role: 'Technical Lead', start: 'Mar 2025', end: 'Now', type: 'Professional' },
-  { name: 'Procurement Dashboard', role: 'Full Stack Developer', start: 'Mar 2025', end: 'Now', type: 'Professional' },
+  { name: 'Healthcare OCR & NLP', role: 'Technical Lead', start: 'Mar 2025', end: 'Now', type: 'GenAI' },
   { name: 'Unified CRM', role: 'Full Stack Developer', start: 'Mar 2025', end: 'Now', type: 'Professional' },
   { name: 'Asset Mgmt Dashboard', role: 'Team Lead', start: 'Mar 2025', end: 'Now', type: 'Professional' },
+  { name: 'ITSM LLM Chatbot', role: 'Associate Engineer', start: 'Mar 2022', end: 'Feb 2025', type: 'GenAI' },
   { name: 'Govt. Case Portal', role: 'Associate Engineer', start: 'Mar 2022', end: 'Feb 2025', type: 'Enterprise' },
-  { name: 'Ticket Automation', role: 'Associate Engineer', start: 'Mar 2022', end: 'Feb 2025', type: 'Enterprise' },
+  { name: 'SLA Analytics', role: 'Associate Engineer', start: 'Mar 2022', end: 'Feb 2025', type: 'Analytics' },
 ]
 
-const GANTT_START = new Date('2021-11-01').getTime()
-const GANTT_END   = new Date('2026-07-29').getTime()
-const GANTT_SPAN  = GANTT_END - GANTT_START
-const today       = new Date().getTime()
+const GANTT_START = new Date('2020-11-01').getTime()
+const GANTT_END = new Date('2027-01-01').getTime()
+const GANTT_SPAN = GANTT_END - GANTT_START
+const today = new Date().getTime()
 
 function ganttBar(startStr, endStr) {
   const s = Math.max(new Date(startStr).getTime(), GANTT_START)
   const e = endStr ? new Date(endStr).getTime() : today
-  const left  = ((s - GANTT_START) / GANTT_SPAN) * 100
+  const left = ((s - GANTT_START) / GANTT_SPAN) * 100
   const width = ((Math.min(e, today) - s) / GANTT_SPAN) * 100
   return { left: `${left.toFixed(1)}%`, width: `${Math.max(width, 1.5).toFixed(1)}%` }
 }
@@ -399,12 +405,12 @@ function ganttBar(startStr, endStr) {
 const todayPct = (((today - GANTT_START) / GANTT_SPAN) * 100).toFixed(1)
 
 const ganttRows = [
-  { name: 'Kaizen Que',       start: '2025-03-01', end: null },
+  { name: 'Kaizen Que', start: '2025-03-01', end: null },
   { name: 'iFIX Tech Global', start: '2022-03-01', end: '2025-02-28' },
-  { name: 'VEverywhere',      start: '2020-11-01', end: '2021-06-30' },
-  { name: 'IEHP Medical Sys', start: '2025-03-01', end: null },
-  { name: 'Unified CRM',      start: '2025-03-01', end: null },
-  { name: 'Govt. Case Portal',start: '2022-06-01', end: '2024-12-31' },
+  { name: 'EVERYWHERE', start: '2020-11-01', end: '2021-06-30' },
+  { name: 'Healthcare AI', start: '2025-03-01', end: null },
+  { name: 'Unified CRM', start: '2025-03-01', end: null },
+  { name: 'Govt. Case Portal', start: '2022-06-01', end: '2024-12-31' },
 ]
 
 function WorksOSSection() {
@@ -431,18 +437,18 @@ function WorksOSSection() {
       {/* Desktop */}
       <div style={{ flex: 1, padding: '1.5rem', position: 'relative', display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
         {/* Desktop file */}
-        <div style={{ position: 'absolute', left: '1.5rem', bottom: '5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem', cursor: 'pointer' }}>
+        <a href={resumePdf} target="_blank" rel="noreferrer" style={{ position: 'absolute', left: '1.5rem', bottom: '5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem', cursor: 'pointer', textDecoration: 'none' }}>
           <div style={{ width: 48, height: 56, background: 'rgba(255,255,255,0.18)', border: '1px solid rgba(255,255,255,0.3)', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <span style={{ fontSize: '0.55rem', color: 'rgba(255,255,255,0.7)' }}>≡</span>
           </div>
           <span style={{ fontSize: '0.55rem', color: 'white', textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>resume.pdf</span>
-        </div>
+        </a>
 
         {open ? (
           <div style={{ background: 'var(--bg)', border: '1px solid rgba(0,0,0,0.12)', borderRadius: 8, overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.35)', width: '100%', maxWidth: 920, animation: 'fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) forwards' }}>
             {/* Window chrome */}
             <div style={{ background: '#ece7dc', borderBottom: '1px solid rgba(0,0,0,0.1)', padding: '0.5rem 0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              {[{ c: '#ff5f57', fn: () => setOpen(false) }, { c: '#ffbd2e', fn: () => {} }, { c: '#28c840', fn: () => {} }].map((b, i) => (
+              {[{ c: '#ff5f57', fn: () => setOpen(false) }, { c: '#ffbd2e', fn: () => { } }, { c: '#28c840', fn: () => { } }].map((b, i) => (
                 <span key={i} onClick={b.fn} style={{ width: 11, height: 11, borderRadius: '50%', background: b.c, cursor: 'pointer', flexShrink: 0 }} />
               ))}
               <span style={{ flex: 1, textAlign: 'center', fontSize: '0.68rem', color: 'var(--text-muted)', letterSpacing: '0.04em' }}>Works</span>
@@ -470,12 +476,12 @@ function WorksOSSection() {
             {/* Gantt */}
             <div>
               <div style={{ background: '#e8e3d8', padding: '0.45rem 1.25rem', borderBottom: '1px solid var(--border)' }}>
-                <span style={{ fontSize: '0.62rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 500 }}>Timeline (from 2021)</span>
+                <span style={{ fontSize: '0.62rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 500 }}>Timeline (from 2020)</span>
               </div>
 
               {/* Year headers */}
               <div style={{ position: 'relative', paddingLeft: 170, paddingRight: '1.25rem', borderBottom: '1px solid var(--border)', height: 28 }}>
-                {['2022', '2023', '2024', '2025', '2026'].map((y) => {
+                {['2021', '2022', '2023', '2024', '2025', '2026'].map((y) => {
                   const pct = ((new Date(`${y}-01-01`).getTime() - GANTT_START) / GANTT_SPAN) * 100
                   if (pct < 0 || pct > 100) return null
                   return (
@@ -540,9 +546,9 @@ function WorksOSSection() {
    EXPERIENCE
 ══════════════════════════════════════════ */
 const currentFocus = [
-  'Building AI-powered OCR platforms for US healthcare law firms.',
-  'Delivering 100+ responsive lead-generation websites at pace.',
-  'Orchestrating rapid product releases collaborating with senior stakeholders.',
+  'Building AI-powered OCR and NLP workflows for decades of healthcare records.',
+  'Improving retrieval, upload, and real-time dashboard performance at scale.',
+  'Leading architecture and cross-functional delivery across GenAI, growth, and product.',
 ]
 
 const careerTimeline = [
@@ -552,21 +558,21 @@ const careerTimeline = [
     type: 'Full-time',
     current: true,
     period: 'Mar 2025 – Present',
-    duration: '4+ mos',
+    duration: 'Present',
     location: 'Bengaluru, India',
     locType: 'On-site',
-    desc: 'Built AI-powered OCR platform integrating Gemini APIs; architected asset management dashboard tracking 200+ equipment; led launch of 100+ SEO-optimised lead-generation websites in a 3-week sprint.',
+    desc: 'Implemented an AI-powered OCR and NLP platform with 95%+ extraction accuracy across 25+ years of patient records. Cut uploads by 70%, perceived retrieval latency by 65%, and manual review effort by 60%.',
   },
   {
     title: 'Full Stack Developer',
     company: 'Kaizen Que',
     type: 'Full-time',
     current: false,
-    period: 'Mar 2025',
+    period: 'Mar 2025 – Present',
     duration: '',
     location: 'Bengaluru, India',
     locType: 'On-site',
-    desc: 'Designed and launched a project management system from scratch, boosting team productivity by 60%. Integrated a unified CRM enabling 200–300 organic leads monthly.',
+    desc: 'Built a unified CRM integrating Google Ads, Facebook, and 100+ landing pages, generating 5,000+ organic leads monthly. Improved ROI by 35% and reduced manual asset management by 40%.',
   },
   {
     title: 'Associate Software Engineer',
@@ -577,18 +583,18 @@ const careerTimeline = [
     duration: '3 yrs',
     location: 'Bengaluru, India',
     locType: 'On-site',
-    desc: 'Automated ticket systems for 2M+ users, built a role-based government case management portal streamlining 10K+ annual filings, and modernised a legacy platform securing 5+ major enterprise clients.',
+    desc: 'Redesigned an OpenAI LLM-based ITSM chatbot, improved answer relevance by 30%, accelerated SLA analytics by 20%, reduced bulk ticket payloads by 75%, and streamlined 10,000+ annual government filings.',
   },
   {
     title: 'Full Stack Developer',
-    company: 'VEverywhere',
+    company: 'EVERYWHERE',
     type: 'Internship',
     current: false,
     period: 'Nov 2020 – Jun 2021',
     duration: '8 mos',
     location: 'Bengaluru, India',
     locType: 'On-site',
-    desc: 'Converted Figma prototypes into a fully responsive React.js website independently. Implemented lazy loading, image optimisation, and memoization — reducing page load time by 70%.',
+    desc: 'Independently converted Figma prototypes into a responsive React.js product and improved Core Web Vitals through code splitting, lazy loading, compression, and memoization, cutting page load time by 70%.',
   },
 ]
 
@@ -681,6 +687,37 @@ function ExperienceSection() {
   )
 }
 
+const recognition = [
+  ['Consistent Performer Award', 'Recognized for ownership, execution excellence, and cross-functional delivery.'],
+  ['Global Hackathon Participant', 'Devpost YouCam AI Challenge — Skin Analysis + Virtual Try-On solution.'],
+  ['Product Management Certificate', 'Product strategy, roadmaps, prioritization frameworks, PRDs, and stakeholder management.'],
+  ['MERN Stack Development', 'PrepBytes six-month bootcamp with six capstone projects.'],
+  ['Microsoft Technology Associate', 'Security Fundamentals, 2018.'],
+  ['Machine Learning & Data Science', 'Nelumbus Technologies.'],
+]
+
+function RecognitionSection() {
+  return (
+    <section id="recognition" style={{ padding: '5rem 2.5rem', borderTop: '1px solid var(--border)' }}>
+      <div className="reveal">
+        <p style={{ fontSize: '0.65rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.75rem' }}>[Recognition]</p>
+        <h2 className="font-display" style={{ fontSize: 'clamp(2.5rem, 5vw, 5rem)', fontWeight: 600, color: 'var(--text)', lineHeight: 1 }}>
+          Awards &amp; Certifications
+        </h2>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 0, marginTop: '3rem', borderTop: '1px solid var(--border)' }}>
+        {recognition.map(([title, detail], index) => (
+          <article key={title} className="reveal" style={{ padding: '1.75rem 1.5rem 1.75rem 0', borderBottom: '1px solid var(--border)', transitionDelay: `${index * 0.06}s` }}>
+            <p style={{ fontSize: '0.62rem', color: 'var(--accent)', marginBottom: '0.7rem' }}>0{index + 1}</p>
+            <h3 className="font-display" style={{ fontSize: '1.35rem', fontWeight: 600, marginBottom: '0.55rem' }}>{title}</h3>
+            <p style={{ fontSize: '0.72rem', lineHeight: 1.7, color: 'var(--text-muted)', maxWidth: 360 }}>{detail}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 /* ══════════════════════════════════════════
    CONTACT
 ══════════════════════════════════════════ */
@@ -693,13 +730,16 @@ function ContactSection() {
           Let's work together
         </h2>
         <p style={{ fontSize: '0.82rem', lineHeight: 1.8, color: 'var(--text-muted)', maxWidth: '380px', marginBottom: '2.5rem' }}>
-          Open to full-time roles, freelance projects, and international collaborations. Always happy to talk product, architecture, or a great idea.
+          Based in Bengaluru and open to relocation, full-time roles, and thoughtful collaborations across GenAI, product engineering, and scalable web platforms.
         </p>
         <a href="mailto:rakshumathew.2614@gmail.com" className="hover-line" style={{ fontSize: '1rem', color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.04em' }}>
           rakshumathew.2614@gmail.com
         </a>
         <div style={{ marginTop: '1.25rem', display: 'flex', gap: '1.5rem' }}>
           <a href="tel:+918310108135" className="hover-line" style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textDecoration: 'none' }}>+91 83101 08135</a>
+          <a href={resumePdf} download="Rakshitha_M_Resume.pdf" className="hover-line" style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Download resume</a>
+          <a href={profileLinks.linkedin} target="_blank" rel="noreferrer" className="hover-line" style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textDecoration: 'none' }}>LinkedIn</a>
+          <a href={profileLinks.github} target="_blank" rel="noreferrer" className="hover-line" style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textDecoration: 'none' }}>GitHub</a>
         </div>
       </div>
     </section>
@@ -715,14 +755,14 @@ function Footer() {
       <div className="reveal" style={{ display: 'flex', gap: '4rem', flexWrap: 'wrap', marginBottom: '4rem' }}>
         <div>
           <p style={{ fontSize: '0.6rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>[Menu]</p>
-          {['Top', 'About', 'Skills', 'Work', 'Contact'].map((item) => (
+          {['Top', 'About', 'Skills', 'Work', 'Experience', 'Recognition', 'Contact'].map((item) => (
             <a key={item} href={`#${item.toLowerCase()}`} className="hover-line" style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text)', textDecoration: 'none', marginBottom: '0.3rem' }}>{item}</a>
           ))}
         </div>
         <div>
           <p style={{ fontSize: '0.6rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>[Social]</p>
-          {['LinkedIn', 'GitHub'].map((s) => (
-            <a key={s} href="#" className="hover-line" style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text)', textDecoration: 'none', marginBottom: '0.3rem' }}>{s}</a>
+          {[['LinkedIn', profileLinks.linkedin], ['GitHub', profileLinks.github]].map(([label, url]) => (
+            <a key={label} href={url} target="_blank" rel="noreferrer" className="hover-line" style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text)', textDecoration: 'none', marginBottom: '0.3rem' }}>{label}</a>
           ))}
         </div>
         <div>
@@ -759,6 +799,7 @@ export default function App() {
       <WorkSection />
       <WorksOSSection />
       <ExperienceSection />
+      <RecognitionSection />
       <ContactSection />
       <Footer />
     </div>
